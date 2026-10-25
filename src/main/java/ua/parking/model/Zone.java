@@ -1,18 +1,18 @@
 package ua.parking.model;
 
 import java.util.Objects;
+
 import ua.parking.util.ParkingUtils;
 import ua.common.BaseEntity;
-
 public class Zone extends BaseEntity {
     private String zoneCode;
-    private String type;
+    private ZoneType type;
     private double ratePerHour;
 
-    public Zone(String zoneCode, String type, double ratePerHour) {
+    public Zone(String zoneCode, ZoneType type, double ratePerHour) {
         super();
         this.zoneCode = ParkingUtils.requireNotBlank(zoneCode, "Zone code");
-        this.type = ParkingUtils.validateZoneType(type);
+        this.type = type;
         setRatePerHour(ratePerHour);
     }
 
@@ -20,7 +20,7 @@ public class Zone extends BaseEntity {
         this.ratePerHour = ParkingUtils.requirePositive(ratePerHour, "Rate per hour");
     }
     public String getZoneCode() { return zoneCode; }
-    public String getType() { return type; }
+    public ZoneType getType() { return type; }
     public double getRatePerHour() { return ratePerHour; }
     
     public boolean equals(Object o) {
