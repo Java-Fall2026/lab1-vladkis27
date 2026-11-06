@@ -1,12 +1,10 @@
 package ua.parking.util;
 
 import java.time.Duration;
-import java.util.Arrays;
 import java.time.LocalDateTime;
-import java.util.List;
+import ua.parking.model.ZoneType;
 import ua.parking.model.ParkingTicket;
 public class ParkingUtils {
-    private static List<String> valid_types = Arrays.asList("VIP", "UNDERGROUND", "OVERGROUND");
     public static void requireNotNull(Object obj, String fieldName) {
         ValidationHelper.requireNotNull(obj, fieldName);
     }
@@ -17,14 +15,6 @@ public class ParkingUtils {
     public static double requirePositive(double value, String fieldName) {
         ValidationHelper.requirePositive(value, fieldName);
         return value;
-    }
-    public static String validateZoneType(String type) {
-        ValidationHelper.requireNotBlank(type, "Zone type");
-        String normalized = FormatHelper.capitalize(type);
-        if(!valid_types.contains(normalized)) {
-            throw new IllegalArgumentException("Type must be one of " + valid_types + ", got: " + normalized);
-        }
-        return normalized;
     }
     public static String normalizeVehiclePlate(String plate) {
         ValidationHelper.requireNotBlank(plate, "Vehicle plate");
@@ -58,5 +48,19 @@ public class ParkingUtils {
             return 0.0;
         }
         return parkedHours(ticket) * ticket.getZone().getRatePerHour();
+    }
+    public static String getZoneDescription(ZoneType zoneType) {
+        return switch(zoneType) {
+            case VIP -> "Зона підвищеного комфорту";
+            case UNDERGROUND -> "Підземна парковка";
+            case OVERGROUND -> "Наземна парковка";
+        };
+    }
+    public static double getZoneCoef(ZoneType zoneType) {
+        return switch(zoneType) {
+            case VIP -> 2.0;
+            case UNDERGROUND -> 1.5;
+            case OVERGROUND -> 1.0;
+        };
     }
 }

@@ -1,6 +1,6 @@
 package ua.parking.util;
 
-class FormatHelper {
+public class FormatHelper {
     static String normalize(String str) {
         if(str == null) return null;
         return str.trim();

@@ -46,6 +46,6 @@ public class ParkingTicket extends BaseEntity {
         return Objects.hash(vehiclePlate, entryTime);
     }
     public String toString() {
-        return "ParkingTicket{" + vehiclePlate + "}, zone=" + zone.getZoneCode() + ", driver=" + driver.getFullName() + ", entry time: " + entryTime + ", exit time: " + exitTime + ". Created at: " + createdAt;
+        return "ParkingTicket{" + vehiclePlate + "}, zone=" + zone.getType() + ", driver=" + driver.FullName() + ", entry time: " + entryTime + ", exit time: " + exitTime + ". Created at: " + createdAt;
     }
 }
