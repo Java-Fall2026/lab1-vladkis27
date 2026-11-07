@@ -3,6 +3,10 @@ plugins {
     id 'application'
 }
 
+repositories {
+    mavenCentral()
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -11,6 +15,13 @@ java {
 
 application {
     mainClass = 'ua.parking.Main' // <-- your main class, e.g. 'ua.hotel.Main'
+}
+
+dependencies {
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    runtimeOnly    'ch.qos.logback:logback-classic:1.4.11'
+    implementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    runtimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.withType(JavaCompile).configureEach {
